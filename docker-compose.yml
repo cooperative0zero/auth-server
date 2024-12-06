@@ -1,0 +1,20 @@
+services:
+  gateway:
+    image: 'auth-server:latest'
+    build:
+      dockerfile: Dockerfile
+    container_name: auth-server
+    ports: 
+      - "8100:8080"
+      - "5005:5005"
+    networks:
+      - microservices-network
+    environment:
+      - CLIENT_ID=gateway-server
+      - GRANT_TYPE=password
+      - KEYCLOAK_URL=http://keycloak-service:8080
+      - REALM_NAME=cab-aggregator
+      - CLIENT_SECRET=HbWPiYK6rjwPji64zUBBijARTKETbQxj
+networks:
+  microservices-network:
+    external: true
